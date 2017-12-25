@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.add-todo-form {
+  display: flex;
+  align-items: baseline;
+}
