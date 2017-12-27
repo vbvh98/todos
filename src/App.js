@@ -19,6 +19,9 @@ class App extends Component {
         },
       ],
     };
+    this.addNewToDo = this.addNewToDo.bind(this);
+    this.toggleToDoState = this.toggleToDoState.bind(this);
+    this.removeTodo = this.removeTodo.bind(this);
   }
 
   addNewToDo(text) {
@@ -33,7 +36,9 @@ class App extends Component {
   }
 
   removeTodo(index) {
-    const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).filter((item, i) => i !== index);
+    const newToDos = this.state.todos
+      .map(todo => Object.assign({}, todo))
+      .filter((item, i) => i !== index);
     this.setState({
       todos: newToDos,
     });
@@ -56,10 +61,10 @@ class App extends Component {
           title="Vaibhav's To-Do's"
           showMenuIconButton={false}
         />
-        <NewToDoForm addNewToDo={this.addNewToDo.bind(this)} />
+        <NewToDoForm addNewToDo={this.addNewToDo} />
         <ToDoList
-          toggleToDoState={this.toggleToDoState.bind(this)}
-          removeTodo={this.removeTodo.bind(this)}
+          toggleToDoState={this.toggleToDoState}
+          removeTodo={this.removeTodo}
           todos={this.state.todos}
         />
       </div>
