@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   removeTodo(index) {
-    const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).slice(index, 1);
+    const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).filter((item, i) => i !== index);
     this.setState({
       todos: newToDos,
     });

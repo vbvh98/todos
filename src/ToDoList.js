@@ -10,7 +10,6 @@ class ToDoList extends Component {
   }
 
   handleRemove(index, event) {
-    console.log(event, index);
     this.props.removeTodo(index);
   }
 
