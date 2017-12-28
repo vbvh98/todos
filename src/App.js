@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
-import NewToDoForm from './NewToDoForm';
-import ToDoList from './ToDoList';
+import NewToDoForm from './components/NewToDoForm';
+import ToDoList from './components/ToDoList';
 import './App.css';
 
 class App extends Component {

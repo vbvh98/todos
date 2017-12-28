@@ -8,6 +8,7 @@ class NewToDoForm extends Component {
     this.state = {
       error: false,
     };
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
@@ -36,7 +37,7 @@ class NewToDoForm extends Component {
         />
         <RaisedButton
           style={{ margin: '0 20px 0 0' }}
-          onClick={this.handleSubmit.bind(this)}
+          onClick={this.handleSubmit}
           label="Add To-Do"
           primary
         />
