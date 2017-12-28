@@ -11,10 +11,12 @@ class App extends Component {
       todos: [
         {
           text: 'Hello, World!',
+          date: new Date(),
           done: true,
         },
         {
           text: 'Study, please!',
+          date: new Date(),
           done: false,
         },
       ],
@@ -27,6 +29,7 @@ class App extends Component {
   addNewToDo(text) {
     const newToDo = {
       text,
+      date: new Date(),
       done: false,
     };
     const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).concat(newToDo);

@@ -21,7 +21,7 @@ class ToDoList extends Component {
             <Card>
               <CardHeader
                 title={todo.text}
-                subtitle={todo.done ? 'Completed' : 'To be Done'}
+                subtitle={`${todo.date.getDate()} / ${todo.date.getMonth()} / ${todo.date.getFullYear()}`}
                 actAsExpander
                 showExpandableButton
               />
