@@ -13,12 +13,12 @@ class ToDoItem extends Component {
     };
   }
 
-  handleRemove(index, event) {
+  handleRemove(event, index) {
     event.preventDefault();
     this.props.removeTodo(index);
   }
 
-  toggleToDoComplition(index, event) {
+  toggleToDoComplition(event, index) {
     event.preventDefaults();
     this.props.toggleToDoState(index);
   }
@@ -47,7 +47,9 @@ class ToDoItem extends Component {
         <CardText>
           <Toggle
             toggled={todo.done}
-            onToggle={this.toggleToDoComplition.bind(this, index)}
+            onToggle={(event) => {
+							this.toggleToDoComplition(event, index);
+						}}
             labelPosition="right"
             label="This toggle is mark of completion of this todo."
           />
@@ -61,7 +63,12 @@ class ToDoItem extends Component {
   <CardTitle title={todo.text} expandable />
 				)}
         <CardActions>
-          <FlatButton label="Remove" onClick={this.handleRemove.bind(this, index)} />
+          <FlatButton
+            label="Remove"
+            onClick={(event) => {
+							this.handleRemove(event, index);
+						}}
+          />
           <FlatButton label="Edit" onClick={this.handleEdit.bind(this)} />
         </CardActions>
       </Card>
