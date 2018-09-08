@@ -6,7 +6,7 @@ class ToDoList extends Component {
     return (
       <ul className="todo-list">
         {this.props.todos.map((todo, index) => (
-          <li key={index}>
+          <li key={index} style={{width: '960px'}}>
             <ToDoItem
               todo={todo}
               index={index}

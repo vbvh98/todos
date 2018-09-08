@@ -8,11 +8,9 @@ class NewToDoForm extends Component {
     this.state = {
       error: false,
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit = (event) => {
     const newText = document.getElementById('newTodo').value;
     if (!newText) {
       this.setState({
@@ -26,21 +24,30 @@ class NewToDoForm extends Component {
     });
   }
 
+  _onKeyPress = (event) => {
+    if (event.charCode === 13) { // enter key pressed
+      event.preventDefault();
+      // do something here
+      this.handleSubmit()
+    } 
+  }
+
   render() {
     return (
       <div className="add-todo-form">
-        <TextField
-          style={{ flexGrow: '1', margin: '0 20px' }}
+        Enter New To-Do: <TextField
+          style={{ margin: '0 20px' }}
           hintText="Enter New To-Do...."
           errorText={this.state.error ? 'This field is required' : null}
           id="newTodo"
+          onKeyPress={this._onKeyPress}
         />
-        <RaisedButton
+        {/* <RaisedButton
           style={{ margin: '0 20px 0 0' }}
           onClick={this.handleSubmit}
           label="Add To-Do"
           primary
-        />
+        /> */}
       </div>
     );
   }

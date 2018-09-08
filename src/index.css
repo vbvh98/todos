@@ -6,4 +6,11 @@ body {
 .add-todo-form {
   display: flex;
   align-items: baseline;
+  justify-content: center;
+}
+
+.todo-list {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

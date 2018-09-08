@@ -19,7 +19,7 @@ class ToDoItem extends Component {
   }
 
   toggleToDoComplition(event, index) {
-    event.preventDefaults();
+    event.preventDefault();
     this.props.toggleToDoState(index);
   }
 
@@ -36,11 +36,12 @@ class ToDoItem extends Component {
 
   render() {
     const { todo, index } = this.props;
+    const cardStyle = {background: todo.done ? 'rgb(0, 220, 200)' : '#f55f51'}
     return (
-      <Card>
+      <Card style={cardStyle}>
         <CardHeader
           title={todo.text}
-          subtitle={`${todo.date.getDate()} / ${todo.date.getMonth()} / ${todo.date.getFullYear()}`}
+          subtitle={`${todo.date.day} / ${todo.date.month} / ${todo.date.year}`}
           actAsExpander
           showExpandableButton
         />
@@ -69,7 +70,7 @@ class ToDoItem extends Component {
 							this.handleRemove(event, index);
 						}}
           />
-          <FlatButton label="Edit" onClick={this.handleEdit.bind(this)} />
+          {/* <FlatButton label="Edit" onClick={this.handleEdit.bind(this)} /> */}
         </CardActions>
       </Card>
     );

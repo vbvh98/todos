@@ -7,53 +7,63 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      todos: [
-        {
-          text: 'Hello, World!',
-          date: new Date(),
-          done: true,
-        },
-        {
-          text: 'Study, please!',
-          date: new Date(),
-          done: false,
-        },
-      ],
-    };
-    this.addNewToDo = this.addNewToDo.bind(this);
-    this.toggleToDoState = this.toggleToDoState.bind(this);
-    this.removeTodo = this.removeTodo.bind(this);
+    let constate = {
+      todos: []
+    }
+    if (localStorage.getItem('state')){
+      constate = JSON.parse(localStorage.getItem('state'))
+    }
+    this.state = constate;
+    
   }
 
-  addNewToDo(text) {
+  save = () => {
+    localStorage.removeItem('state')
+    localStorage.setItem('state', JSON.stringify(this.state))
+  }
+
+  addNewToDo = (text) => {
+    let date = new Date()
     const newToDo = {
       text,
-      date: new Date(),
+      date: {
+        day: date.getDate(),
+        month: date.getMonth(),
+        year: date.getFullYear()
+      },
       done: false,
     };
     const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).concat(newToDo);
     this.setState({
       todos: newToDos,
-    });
+    }, () => this.save());
+    
   }
 
-  removeTodo(index) {
+  removeTodo = (index) => {
     const newToDos = this.state.todos
       .map(todo => Object.assign({}, todo))
       .filter((item, i) => i !== index);
+
     this.setState({
       todos: newToDos,
-    });
+    }, () => this.save());
+    
   }
 
-  toggleToDoState(index) {
-    const newToDos = this.state.todos.map(todo => Object.assign({}, todo));
-    newToDos[index].done = !newToDos[index].done;
-
-    this.setState({
-      todos: newToDos,
-    });
+  toggleToDoState = (index) => {
+    this.setState(prevState => {
+      let toggledTodo = prevState.todos[index]
+      toggledTodo = {
+        ...toggledTodo, done: toggledTodo.done ? false : true
+      }
+      return {
+        todos: prevState.todos.map((todo, i) => {
+          return i !== index ? todo : toggledTodo
+        })
+      }
+    }, () => this.save());
+    
   }
 
   render() {
@@ -65,11 +75,11 @@ class App extends Component {
           showMenuIconButton={false}
         />
         <NewToDoForm addNewToDo={this.addNewToDo} />
-        <ToDoList
+        {(this.state.todos) && <ToDoList
           toggleToDoState={this.toggleToDoState}
           removeTodo={this.removeTodo}
           todos={this.state.todos}
-        />
+        />}
       </div>
     );
   }
