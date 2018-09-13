@@ -67,7 +67,7 @@ class App extends Component {
       <div>
         <AppBar
           style={{ textAlign: 'center' }}
-          title="Vaibhav's To-Do's"
+          title="To-Do"
           showMenuIconButton={false}
         />
         <NewToDoForm addNewToDo={this.addNewToDo} />
