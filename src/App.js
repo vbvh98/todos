@@ -33,7 +33,7 @@ class App extends Component {
       },
       done: false,
     };
-    const newToDos = this.state.todos.map(todo => Object.assign({}, todo)).concat(newToDo);
+    const newToDos = [...this.state.todos, newToDo];
     this.setState({
       todos: newToDos,
     }, () => this.save());
@@ -41,9 +41,7 @@ class App extends Component {
   }
 
   removeTodo = (index) => {
-    const newToDos = this.state.todos
-      .map(todo => Object.assign({}, todo))
-      .filter((item, i) => i !== index);
+    const newToDos = [...this.state.todos].filter((e, i) => i !== index);
 
     this.setState({
       todos: newToDos,
@@ -54,9 +52,7 @@ class App extends Component {
   toggleToDoState = (index) => {
     this.setState(prevState => {
       let toggledTodo = prevState.todos[index]
-      toggledTodo = {
-        ...toggledTodo, done: toggledTodo.done ? false : true
-      }
+      toggledTodo = {...toggledTodo, done: toggledTodo.done ? false : true}
       return {
         todos: prevState.todos.map((todo, i) => {
           return i !== index ? todo : toggledTodo
